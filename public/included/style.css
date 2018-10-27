@@ -1,5 +1,5 @@
 .login {
-    margin-top:35%;
+    margin-top:50px;
 }
 
 .row-spacing-sm{
@@ -7,16 +7,26 @@
 }
 
 .row-padding-md {
-    padding: 35px 0px 0px 0px;
+    padding-top: 35px;
+}
+
+.row-padding-sm {
+    padding-top: 20px;
+}
+
+.padding-bottom-sm{
+    padding-bottom: 20px;
 }
 
 .login-header {
     padding: 10px 10px 10px 10px;
     border-radius: 20px 20px 0px 0px;
-    background-color: lightblue;
+    background-color: royalblue;
+    color: floralwhite;
+    font-size: 1.3em;
 }
 
 .login-body {
-    background-color: lightgray;
+    background-color: floralwhite;
     border-radius: 0px 0px 20px 20px;
 }
