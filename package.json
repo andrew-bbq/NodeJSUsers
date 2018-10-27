@@ -1,0 +1,19 @@
+{
+  "name": "nodejsusers",
+  "version": "1.0.0",
+  "description": "nodejs learning",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrew-bbq/NodeJSUsers.git"
+  },
+  "author": "Andrew Bennett, Ben Kosten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrew-bbq/NodeJSUsers/issues"
+  },
+  "homepage": "https://github.com/andrew-bbq/NodeJSUsers#readme"
+}
