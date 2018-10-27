@@ -1,0 +1,22 @@
+.login {
+    margin-top:35%;
+}
+
+.row-spacing-sm{
+    margin-top: 20px;
+}
+
+.row-padding-md {
+    padding: 35px 0px 0px 0px;
+}
+
+.login-header {
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 20px 0px 0px;
+    background-color: lightblue;
+}
+
+.login-body {
+    background-color: lightgray;
+    border-radius: 0px 0px 20px 20px;
+}
