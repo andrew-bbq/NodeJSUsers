@@ -10,9 +10,13 @@ function create_new_user() {
 function displayLogin() {
     $(".register-body").hide();
     $(".login-body").show();
+    $("#register-link").removeClass("active");
+    $("#login-link").addClass("active");
 }
 
 function displayRegister() {
     $(".login-body").hide();
     $(".register-body").show();
+    $("#register-link").addClass("active");
+    $("#login-link").removeClass("active");
 }
