@@ -13,8 +13,23 @@ db.once('open', () => {
     console.log("Connected to DB!");
     
     var userSchema = new mongoose.Schema({
-        name: String,
-        password: String
+        name: {
+            type: String,
+            unique: true,
+            required: true,
+            trim: true
+        }
+        
+        password: {
+            type: String,
+            required: true
+        }
+        email: {
+            type: String,
+            unique: true,
+            required: true,
+            trim: true
+        }
     });
     
     var User = mongoose.model('User', userSchema);
@@ -26,6 +41,7 @@ app.use(bodyParser.urlencoded());
 // This responds a POST request for the homepage
 app.post('/register', (req, res) => {
    console.log(req.body);
+   
    res.redirect("/");
 });
 
