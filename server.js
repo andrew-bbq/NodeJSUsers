@@ -14,7 +14,7 @@ var User;
 db.on('error', console.error.bind(console, "connection error: "));
 db.once('open', () => {
     console.log("Connected to DB!");
-    
+
     var userSchema = new mongoose.Schema({
         name: {
             type: String,
@@ -22,12 +22,12 @@ db.once('open', () => {
             required: true,
             trim: true
         },
-        
+
         password: {
             type: String,
             required: true
         },
-        
+
         email: {
             type: String,
             unique: true,
@@ -35,9 +35,9 @@ db.once('open', () => {
             trim: true
         }
     });
-    
+
     User = mongoose.model('User', userSchema);
-    
+
 });
 
 app.use(express.static('public'))
@@ -45,20 +45,19 @@ app.use(bodyParser.urlencoded());
 
 // This responds a POST request for the homepage
 app.post('/register', (req, res) => {
-   console.log(req.body);
-   
-   User.find({ email: req.body['email'] }, (err, users) => {
-       if (err) {
-           console.error(err);
-       } else {
-           console.log(users);
+    //console.log(req.body);
+
+    User.find({ email: req.body['email'] }, (err, users) => {
+        if (err) console.error(err);
+        else {
+            console.log(users);
             if (users.length == 0) {
                 var user = new User({
                     name: req.body['user'],
                     password: req.body['pass'],
                     email: req.body['email']
                 })
-                
+
                 user.save((err, user) => {
                     if (err) {
                         console.error(err);
@@ -69,14 +68,27 @@ app.post('/register', (req, res) => {
             else {
                 console.log(`${req.body['email']} already registered!`);
             }
-       }
-   });
-   res.redirect("/");
+        }
+    });
+    res.redirect("/");
+});
+
+app.post('/login', (req, res) => {
+    User.where({ email: req.body['email']}).findOne((err, user) => {
+        if (err) console.error(err);
+        else {
+            if(req.body['pass'] == user.password){
+                res.send("Logged in.");
+            } else {
+                res.redirect("/");
+            }
+        }
+    });
 });
 
 var server = app.listen(8081, () => {
-   const host = server.address().address
-   const port = server.address().port
+    const host = server.address().address
+    const port = server.address().port
 
-   console.log("Example app listening at http://%s:%s", host, port)
+    console.log("Example app listening at http://%s:%s", host, port)
 });
