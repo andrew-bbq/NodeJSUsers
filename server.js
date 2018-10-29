@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 //mongodb stuff
 mongoose.connect('mongodb://localhost/test');
@@ -52,17 +53,19 @@ app.post('/register', (req, res) => {
         else {
             console.log(users);
             if (users.length == 0) {
-                var user = new User({
-                    name: req.body['user'],
-                    password: req.body['pass'],
-                    email: req.body['email']
-                })
+                bcrypt.hash(req.body['pass'], 10).then((hash) => {
+                    var user = new User({
+                        name: req.body['user'],
+                        password: hash,
+                        email: req.body['email']
+                    });
 
-                user.save((err, user) => {
-                    if (err) {
-                        console.error(err);
-                        res.status(400).send("Bad Request");
-                    }
+                    user.save((err, user) => {
+                        if (err) {
+                            console.error(err);
+                            res.status(400).send("Bad Request");
+                        }
+                    });
                 });
             }
             else {
@@ -74,10 +77,10 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    User.where({ email: req.body['email']}).findOne((err, user) => {
+    User.where({ email: req.body['email'] }).findOne((err, user) => {
         if (err) console.error(err);
         else {
-            if(req.body['pass'] == user.password){
+            if (req.body['pass'] == user.password) {
                 res.send("Logged in.");
             } else {
                 res.redirect("/");
