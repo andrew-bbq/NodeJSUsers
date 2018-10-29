@@ -51,8 +51,8 @@ app.post('/register', (req, res) => {
     User.where({ email: req.body['email'] }).findOne((err, user) => {
         if (err) console.error(err);
         else {
-            console.log(users);
-            if (users.length == 0) {
+            //console.log(user);
+            if (user == null) {
                 bcrypt.hash(req.body['pass'], 10).then((hash) => {
                     var user = new User({
                         name: req.body['user'],
@@ -80,8 +80,12 @@ app.post('/login', (req, res) => {
     User.where({ email: req.body['email'] }).findOne((err, user) => {
         if (err) console.error(err);
         else {
-            if (req.body['pass'] == user.password) {
-                res.send("Logged in.");
+            if (user != null) {
+                bcrypt.compare(req.body['pass'], user.password).then((result) => {
+                    if (result) {
+                        res.send("Logged in.");
+                    }
+                });
             } else {
                 res.redirect("/");
             }
