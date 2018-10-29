@@ -47,18 +47,18 @@ app.use(bodyParser.urlencoded());
 app.post('/register', (req, res) => {
     //console.log(req.body);
 
-    User.find({ email: req.body['email'] }, (err, users) => {
+    User.where({ email: req.body['email'] }).findOne((err, user) => {
         if (err) console.error(err);
         else {
             console.log(users);
-            if (users.length == 0) {
-                var user = new User({
+            if (user == null) {
+                var newUser = new User({
                     name: req.body['user'],
                     password: req.body['pass'],
                     email: req.body['email']
                 })
 
-                user.save((err, user) => {
+                newUser.save((err, user) => {
                     if (err) {
                         console.error(err);
                         res.status(400).send("Bad Request");
