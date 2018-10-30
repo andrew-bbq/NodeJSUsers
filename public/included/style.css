@@ -25,13 +25,13 @@
 }
 
 .login-body {
-    background-color: floralwhite;
+    background-color: #fafafa;
     border-radius: 0px 0px 20px 20px;
     display: block;
 }
 
 .register-body {
-    background-color: floralwhite;
+    background-color: #fafafa;
     border-radius: 0px 0px 12px 12px;
     display: none;
 }
